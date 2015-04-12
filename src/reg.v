@@ -9,9 +9,26 @@ module Registers (
     input [4:0] addrc,
     input [31:0] datac
 );
-    
-    reg [31:0] registers [31:0];
 
-    //...
+    reg [31:0] registers [31:0];
+    integer i;
+
+    always @ (negedge reset) begin
+        for (i=0; i<31; i=i+1) registers[i] <= 32'b00;
+    end
+
+    always @ (posedge clock) begin
+        if(enc) begin
+            registers[addrc] <= datac;
+        end
+
+        if(!enc || addrc != addra) begin
+            dataa <= registers[addra];
+        end
+
+        if(!enc || addrc != addrb) begin
+            datab <= registers[addrb];
+        end
+    end
 
 endmodule

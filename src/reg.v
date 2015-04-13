@@ -18,16 +18,10 @@ module Registers (
     end
 
     always @ (posedge clock) begin
+        dataa <= registers[addra];
+        datab <= registers[addrb];
         if(enc) begin
             registers[addrc] <= datac;
-        end
-
-        if(!enc || addrc != addra) begin
-            dataa <= registers[addra];
-        end
-
-        if(!enc || addrc != addrb) begin
-            datab <= registers[addrb];
         end
     end
 

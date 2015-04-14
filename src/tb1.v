@@ -23,22 +23,26 @@ module reg_tb;
         addrb = 5'd31;
         datac = 32'd3098;
         enc = 1'b1;
+        #6 datac = 32'd9912;
     end
 
     always begin
-        #5 clock = ~clock;
+        #1 clock = ~clock;
     end
 
     always begin
         #25 reset = ~reset;
-        #25 enc = 1'b0;
+    end
+
+    always begin
+        #15 enc = 1'b0;
     end
 
     initial begin
         $dumpfile ("reg_tb1.vcd");
         $dumpvars;
-        $display("\t\ttime\tclock\tdatab\tenc\nreset");
-        $monitor("%d\t%b\t%d\t%b\t%b", $time, clock, datab, enc, reset);
+        $display("\t\ttime\tclock\t\tdatab\tenc\treset\t\tdatac");
+        $monitor("%d\t%b\t%d\t%b\t%b\t%d", $time, clock, datab, enc, reset, datac);
         #100 $finish;
     end
 

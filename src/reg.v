@@ -10,11 +10,13 @@ module Registers (
     input [31:0] datac
 );
 
-    reg [31:0] registers [31:0];
     integer i;
+    reg [31:0] registers [31:0];
 
     always @ (negedge reset) begin
-        for (i=0; i<31; i=i+1) registers[i] <= 32'b00;
+        for (i=0; i<32; i=i+1) begin
+            registers[i] <= 32'd0;
+        end
     end
 
     always @ (posedge clock) begin

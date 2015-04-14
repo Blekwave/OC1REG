@@ -22,7 +22,7 @@ module Registers (
     always @ (posedge clock) begin
         dataa <= registers[addra];
         datab <= registers[addrb];
-        if(enc) begin
+        if (enc) begin
             registers[addrc] <= datac;
         end
     end

@@ -17,26 +17,18 @@ module reg_tb;
     );
 
     initial begin
-        clock = 0;
-        reset = 1;
-        addrc = 5'd31;
-        addrb = 5'd31;
-        datac = 32'd3098;
-        enc = 1'b1;
+        clock <= 0;
+        reset <= 1;
+        addrc <= 5'd31;
+        addrb <= 5'd31;
+        datac <= 32'd3098;
+        enc <= 1;
         #6 datac = 32'd9912;
     end
 
-    always begin
-        #1 clock = ~clock;
-    end
-
-    always begin
-        #25 reset = ~reset;
-    end
-
-    always begin
-        #15 enc = 1'b0;
-    end
+    always #1 clock <= ~clock;
+    always #25 reset <= ~reset;
+    always #15 enc <= ~enc;
 
     initial begin
         $dumpfile ("reg_tb1.vcd");

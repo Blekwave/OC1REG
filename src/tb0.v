@@ -1,5 +1,5 @@
 module reg_tb;
-    reg clock, reset, enc;
+    reg clock, reset;
     reg [4:0] addra, addrb, addrc;
     wire [31:0] dataa, datab;
     reg [31:0] datac;
@@ -18,27 +18,18 @@ module reg_tb;
 
     initial begin
         clock = 0;
-        reset = 1;
-        addrc = 5'd31;
-        addrb = 5'd31;
-        datac = 32'd3098;
-        enc = 1'b1;
+        reset = 0;
     end
 
     always begin
         #5 clock = ~clock;
     end
 
-    always begin
-        #25 reset = ~reset;
-        #25 enc = 1'b0;
-    end
-
     initial begin
         $dumpfile ("reg_tb1.vcd");
         $dumpvars;
-        $display("\t\ttime\tclock\tdatab\tenc\nreset");
-        $monitor("%d\t%b\t%d\t%b\t%b", $time, clock, datab, enc, reset);
+        $display("\ttime,\tclock\treset");
+        $monitor("%d,\t%b,\t%b", $time, clock, reset);
         #100 $finish;
     end
 
